@@ -1,0 +1,48 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="FontNormal" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="bookshop_title" parent="FontNormal">
+        <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:lineSpacingExtra">@dimen/line_spacing</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+
+    <style name="bookshop_summary" parent="FontNormal">
+        <item name="android:textSize">@dimen/text_size_subs</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/secondary_color</item>
+        <item name="android:lineSpacingExtra">@dimen/line_spacing</item>
+        <item name="android:alpha">0.70</item>
+    </style>
+
+    <style name="bookshop_price" parent="FontNormal">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/secondary_color</item>
+        <item name="android:padding">@dimen/spacing_main</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>

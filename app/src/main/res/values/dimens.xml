@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="progressbar_top">20dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="row_padding_vertical">10dp</dimen>
+
+    <dimen name="gridivew_line_spacing">2dp</dimen>
+    <dimen name="gridivew_padding">5dp</dimen>
+    <dimen name="cardview_corner_radius">4dp</dimen>
+    <dimen name="cardview_elevation">2dp</dimen>
+    <dimen name="gridivew_text_margins">7dp</dimen>
+    <dimen name="gridivew_text_margins_tops">5dp</dimen>
+    <dimen name="gridview_gray_lining">1px</dimen>
+
+    <dimen name="spacing_text_half">6dp</dimen>
+    <dimen name="spacing_text">12dp</dimen>
+
+    <integer name="spacing_main_quarter">4</integer>
+    <integer name="spacing_main_half">8</integer>
+    <integer name="spacing_main_triple_quarter">12</integer>
+    <integer name="spacing_main">16</integer>
+
+    <dimen name="line_spacing">3.5sp</dimen>
+    <dimen name="text_size_subs">12sp</dimen><!--11-->
+    <dimen name="text_size_title">15sp</dimen><!--14-->
+    <dimen name="text_size_title_big">22sp</dimen>
+    <integer name="bullet_size">6</integer>
+    <integer name="bullet_space">7</integer>
+
+    <dimen name="spacing_secondary">5dp</dimen>
+    <dimen name="oval_diameter">25dp</dimen>
+
+    <dimen name="spacing_main_quarter">4dp</dimen>
+    <dimen name="spacing_main_half">8dp</dimen>
+    <dimen name="spacing_main_triple_quarter">12dp</dimen>
+    <dimen name="spacing_main">16dp</dimen>
+    <dimen name="spacing_main_double">32dp</dimen>
+    <dimen name="titles_top_negative_margin">-6dp</dimen>
+    <dimen name="app_bar_height">300dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+
+</resources>
