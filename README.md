@@ -47,6 +47,8 @@ Google Play Store Link
 
 Screenshots
 -----------
+<a href="url"><img src="https://user-images.githubusercontent.com/48313933/54864888-6f027f80-4d83-11e9-9dfd-acb571a17298.jpg " align="left" height="200" width="200"></a>
+
 ![Movie List](https://user-images.githubusercontent.com/48313933/54864888-6f027f80-4d83-11e9-9dfd-acb571a17298.jpg)
 
 ![Movie Detail](https://user-images.githubusercontent.com/48313933/54864886-6ad66200-4d83-11e9-82aa-f4695bd598bd.jpg)
