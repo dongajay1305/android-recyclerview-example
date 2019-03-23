@@ -15,8 +15,7 @@ Getting started
 
 This sample uses the Gradle build system.
 
-1. Download the samples by cloning this repository or downloading an archived
-  snapshot. (See the options at the top of the page.)
+1. Download the samples by cloning this repository(See the options at the top of the page.)
 1. In Android Studio, create a new project and choose the "Import non-Android Studio project" or
   "Import Project" option.
 
