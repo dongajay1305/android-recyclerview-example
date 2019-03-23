@@ -12,7 +12,7 @@
         <item name="android:fontFamily">sans-serif</item>
     </style>
 
-    <style name="bookshop_title" parent="FontNormal">
+    <style name="movie_title" parent="FontNormal">
         <item name="android:textSize">@dimen/text_size_title</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@android:color/black</item>
@@ -21,18 +21,18 @@
     </style>
 
 
-    <style name="bookshop_summary" parent="FontNormal">
+    <style name="movie_overview" parent="FontNormal">
         <item name="android:textSize">@dimen/text_size_subs</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/secondary_color</item>
+        <item name="android:textColor">@color/colorAccent</item>
         <item name="android:lineSpacingExtra">@dimen/line_spacing</item>
         <item name="android:alpha">0.70</item>
     </style>
 
-    <style name="bookshop_price" parent="FontNormal">
+    <style name="movie_date" parent="FontNormal">
         <item name="android:textSize">13sp</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/secondary_color</item>
+        <item name="android:textColor">@color/colorAccent</item>
         <item name="android:padding">@dimen/spacing_main</item>
     </style>
 

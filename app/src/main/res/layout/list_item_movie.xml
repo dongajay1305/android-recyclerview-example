@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="@dimen/spacing_main"
                     android:layout_marginTop="@dimen/titles_top_negative_margin"
-                    style="@style/bookshop_title"
+                    style="@style/movie_title"
                     android:text="Title"/>
 
                 <TextView
@@ -53,10 +53,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_text_half"
-                    style="@style/bookshop_summary"
+                    style="@style/movie_overview"
                     android:maxLines="4"
                     android:ellipsize="end"
-                    android:text="Overview" />
+                    android:text="Overview"
+                    android:visibility="gone"/>
 
                 <!--<TextView
                     android:id="@+id/tv_date"
@@ -76,8 +77,8 @@
                 android:id="@+id/tv_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/bookshop_price"
-                android:textColor="@color/primaryDark"
+                style="@style/movie_date"
+                android:textColor="@color/colorAccent"
                 android:gravity="center_horizontal"
                 android:text="Release Date"/>
 

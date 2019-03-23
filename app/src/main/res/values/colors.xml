@@ -19,8 +19,6 @@
     <color name="secondary_color">#4D4C5A</color>
 
     <color name="primary">#FFFFFF</color>
-    <color name="primaryDark">#E64A19</color> <!--#C1C1C1-->
     <color name="dark_gray">#C1C1C1</color>
-    <color name="accent">#FF5722</color>
     <color name="placeholder">#D7D7D7</color>
 </resources>

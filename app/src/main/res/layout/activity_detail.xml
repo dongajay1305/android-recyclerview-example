@@ -35,32 +35,94 @@
                     android:layout_width="match_parent"
                     android:layout_gravity="bottom"/>
 
+                 <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="horizontal"
+                android:layout_gravity="bottom">
 
                 <LinearLayout
                     android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:layout_gravity="bottom|left"
-                    android:layout_marginLeft="16dp"
+                    android:layout_width="0dip"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_marginBottom="6dp"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_topic_new"
+                        android:id="@+id/tv_popularity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#ffffff"
-                        android:gravity="bottom"
+                        android:gravity="center"
                         android:textStyle="bold"
-                        android:layout_gravity="bottom|left"
                         android:textSize="14dp"/>
 
                     <ImageView
-                        android:id="@+id/iv_line"
+                        android:id="@+id/iv_line1"
                         android:layout_height="3dp"
                         android:layout_marginTop="3dp"
                         android:background="@color/white"
                         android:layout_width="match_parent"/>
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="6dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#ffffff"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textSize="14dp"/>
+
+                    <ImageView
+                        android:id="@+id/iv_line2"
+                        android:layout_height="3dp"
+                        android:layout_marginTop="3dp"
+                        android:background="@color/white"
+                        android:layout_width="match_parent"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="6dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_votes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#ffffff"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textSize="14dp"/>
+
+                    <ImageView
+                        android:id="@+id/iv_line3"
+                        android:layout_height="3dp"
+                        android:layout_marginTop="3dp"
+                        android:background="@color/white"
+                        android:layout_width="match_parent"/>
+                </LinearLayout>
+            </LinearLayout>
             </FrameLayout>
 
             <LinearLayout

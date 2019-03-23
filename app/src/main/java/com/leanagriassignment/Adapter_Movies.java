@@ -114,12 +114,6 @@ public class Adapter_Movies extends RecyclerView.Adapter<Adapter_Movies.ViewHold
                 Log.e("my log","picture path : "+url);
                 Picasso.get().load(url).placeholder(R.color.placeholder).fit().into(((ViewHolder) holder).ivImage);
 
-                /*try{
-                    Picasso.get().load(url).placeholder(R.color.placeholder).into(((ViewHolder) holder).ivImage);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }*/
-
             }
         }
 

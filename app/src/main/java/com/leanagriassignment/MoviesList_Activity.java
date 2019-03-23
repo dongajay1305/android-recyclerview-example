@@ -46,9 +46,8 @@ public class MoviesList_Activity extends AppCompatActivity {
     private Adapter_Movies mAdapter;
     SwipeRefreshLayout mswipe1;
     LinearLayoutManager mlinearLayoutManager;
-    private StaggeredGridLayoutManager _sGridLayoutManager;
+    private StaggeredGridLayoutManager mGridLayoutManager;
     LinearLayout llnodata;
-    CardView llBottomSheet;
     TextView txtrefresh;
     ProgressBar progressbar;
 
@@ -86,10 +85,10 @@ public class MoviesList_Activity extends AppCompatActivity {
         llnodata =  findViewById(R.id.llnodata);
         txtrefresh =  findViewById(R.id.txtrefresh);
 
-        mlinearLayoutManager = new LinearLayoutManager(this);
-        mlinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        _sGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(_sGridLayoutManager);
+        //mlinearLayoutManager = new LinearLayoutManager(this);
+        //mlinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(mGridLayoutManager);
         //recyclerView.setItemAnimator(new DefaultItemAnimator());
         //recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(getResources().getInteger(R.integer.spacing_main_triple_quarter)));
 
@@ -106,8 +105,10 @@ public class MoviesList_Activity extends AppCompatActivity {
 
                 if (!nomorefeed&&movieList.size()>0) {
                     int visibleItemCount = recyclerView.getChildCount();
-                    int totalItemCount = mlinearLayoutManager.getItemCount();
-                    int firstVisibleItem = mlinearLayoutManager.findFirstVisibleItemPosition();
+                    int totalItemCount = mGridLayoutManager.getItemCount();
+                    int[] firstVisibleItems = new int[2];
+                    int[] firstVisibleItem_ = mGridLayoutManager.findFirstVisibleItemPositions(firstVisibleItems);
+                    int firstVisibleItem = firstVisibleItem_[0];
                     int currentpage = (Integer) mAdapter.GetPageNo();
 
                     //for enable disable swiperefreshlayout

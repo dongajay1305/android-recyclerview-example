@@ -38,6 +38,9 @@ public class Detail_Activity extends AppCompatActivity {
     TextView tvTitle, tvOverview, tvDate;
     LinearLayout llBottom;
 
+    ImageView ivLine1, ivLine2,ivLine3;
+    TextView tvPop, tvRating, tvVotes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +55,13 @@ public class Detail_Activity extends AppCompatActivity {
         llBottom = findViewById(R.id.ll_bottom);
         ivGradient = findViewById(R.id.iv_gradient);
 
+        ivLine1 = findViewById(R.id.iv_line1);
+        ivLine2 = findViewById(R.id.iv_line2);
+        ivLine3 = findViewById(R.id.iv_line3);
+
+        tvPop = findViewById(R.id.tv_popularity);
+        tvRating = findViewById(R.id.tv_rating);
+        tvVotes = findViewById(R.id.tv_votes);
 
         DateFormat dateFormatAPI = new SimpleDateFormat("yyyy-mm-dd");
         DateFormat dateFormatPrint = new SimpleDateFormat("dd-MMM-yyyy");
@@ -65,8 +75,11 @@ public class Detail_Activity extends AppCompatActivity {
 
             tvTitle.setText(data.getTitle());
             tvOverview.setText(data.getOverview());
-            tvDate.setText(dateFormatPrint.format(dateAPI));
+            tvDate.setText("Release Date : "+dateFormatPrint.format(dateAPI));
 
+            tvPop.setText("Popularity\n"+data.getPopularity());
+            tvRating.setText("Rating\n"+data.getVoteAverage());
+            tvVotes.setText("Votes\n"+data.getVoteCount());
 
             Picasso.get().load(Constants.IMAGE_URL_PATH+data.getPosterPath()).into(ivImage, new Callback() {
                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -81,9 +94,24 @@ public class Detail_Activity extends AppCompatActivity {
                                     public void onGenerated(Palette palette) {
 
                                         Palette.Swatch textSwatch = palette.getDominantSwatch();
+                                        Palette.Swatch textSwatchVib = palette.getVibrantSwatch();
                                         if (textSwatch == null) {
                                             textSwatch = palette.getDominantSwatch();
                                         }
+                                        int colorVirant;
+                                        try {
+                                             colorVirant = textSwatchVib.getRgb();
+                                        }catch (Exception e){
+                                             colorVirant = textSwatch.getTitleTextColor();
+                                        }
+
+                                        ivLine1.setBackgroundColor(colorVirant);
+                                        ivLine2.setBackgroundColor(colorVirant);
+                                        ivLine3.setBackgroundColor(colorVirant);
+                                        tvPop.setTextColor(colorVirant);
+                                        tvRating.setTextColor(colorVirant);
+                                        tvVotes.setTextColor(colorVirant);
+
 
                                         int color = textSwatch.getRgb();
                                         int transparent1 = Color.argb(255, Color.red(color), Color.green(color), Color.blue(color));
@@ -102,6 +130,14 @@ public class Detail_Activity extends AppCompatActivity {
                                         tvTitle.setTextColor(textSwatch.getTitleTextColor());
                                         tvOverview.setTextColor(textSwatch.getBodyTextColor());
                                         tvDate.setTextColor(textSwatch.getBodyTextColor());
+
+
+                                        ivLine1.setBackgroundColor(colorVirant);
+                                        ivLine2.setBackgroundColor(colorVirant);
+                                        ivLine3.setBackgroundColor(colorVirant);
+                                        tvPop.setTextColor(textSwatch.getTitleTextColor());
+                                        tvRating.setTextColor(textSwatch.getTitleTextColor());
+                                        tvVotes.setTextColor(textSwatch.getTitleTextColor());
 
 
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
