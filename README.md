@@ -40,17 +40,19 @@ Libraries
 - For Movie Detail screen android palette lib is source to create gradiant, statusbar color and font colors based on bitmap of movie poster.
 
 
-Screenshots
------------
-![Movie List](https://user-images.githubusercontent.com/48313933/54864888-6f027f80-4d83-11e9-9dfd-acb571a17298.jpg "Movie List"){:height="50%" width="50%"}
-
-![Movie Detail](https://user-images.githubusercontent.com/48313933/54864886-6ad66200-4d83-11e9-82aa-f4695bd598bd.jpg "Movie Detail"){:height="50%" width="50%"}
-
-
-
 Google Play Store Link
 ----------------------
 - https://play.google.com/store/apps/details?id=com.leanagriassignment
+
+
+Screenshots
+-----------
+![Movie List](https://user-images.githubusercontent.com/48313933/54864888-6f027f80-4d83-11e9-9dfd-acb571a17298.jpg)
+
+![Movie Detail](https://user-images.githubusercontent.com/48313933/54864886-6ad66200-4d83-11e9-82aa-f4695bd598bd.jpg)
+
+
+
 
 
 
