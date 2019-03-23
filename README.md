@@ -28,8 +28,7 @@ App overview
 - App uses  https://www.themoviedb.org/ APIs to show list of movies and clicking on any movie redirects to movie details screen.
 - There is also option to sort movies based on release date, rating, votes, popularity etc.
 
-
-Functionality and Libraries
+Libraries
 -----------
 (1)Movie List Screen.
 - Recyclerview with gridlayout manager used to show movie list.
