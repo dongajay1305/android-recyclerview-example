@@ -30,7 +30,7 @@ App overview
 
 Libraries
 -----------
-(1)Movie List Screen.
+(1) Movie List Screen.
 - Recyclerview with Gridlayout manager used to show movie list.
 - okHttp is networking lib for API calls.
 - Picasso is image loading lib.
