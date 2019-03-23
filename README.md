@@ -31,7 +31,7 @@ App overview
 Libraries
 -----------
 (1)Movie List Screen.
-- Recyclerview with gridlayout manager used to show movie list.
+- Recyclerview with Gridlayout manager used to show movie list.
 - okHttp is networking lib for API calls.
 - Picasso is image loading lib.
 - Gson is JSON parsing lib.
@@ -42,7 +42,9 @@ Libraries
 
 Screenshots
 -----------
-![Screenshot_20190323-133733](https://user-images.githubusercontent.com/48313933/54864888-6f027f80-4d83-11e9-9dfd-acb571a17298.jpg)![Screenshot_20190323-133749](https://user-images.githubusercontent.com/48313933/54864886-6ad66200-4d83-11e9-82aa-f4695bd598bd.jpg)
+![Movie List](https://user-images.githubusercontent.com/48313933/54864888-6f027f80-4d83-11e9-9dfd-acb571a17298.jpg "Movie List"){:height="50%" width="50%"}
+
+![Movie Detail](https://user-images.githubusercontent.com/48313933/54864886-6ad66200-4d83-11e9-82aa-f4695bd598bd.jpg "Movie Detail"){:height="50%" width="50%"}
 
 
 
