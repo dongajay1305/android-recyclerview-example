@@ -1,8 +1,7 @@
-package com.leanagriassignment.model;
+package com.leanagriassignment.modal;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.leanagriassignment.model.Movie_Data;
 
 import java.util.List;
 

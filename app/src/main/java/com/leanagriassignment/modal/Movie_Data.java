@@ -1,4 +1,10 @@
-package com.leanagriassignment.model;
+package com.leanagriassignment.modal;
+
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -6,46 +12,85 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
+@Entity(tableName = "movie_table")
 public class Movie_Data implements Serializable {
+
+
+    @ColumnInfo(name = "vote_count")
     @SerializedName("vote_count")
     @Expose
     private Integer voteCount;
+
+
+    @PrimaryKey(autoGenerate = true)
+    @NonNull
+    @ColumnInfo(name = "uid")
+    @SerializedName("uid")
+    @Expose
+    private Long uid;
+
+
+    @ColumnInfo(name = "id")
     @SerializedName("id")
     @Expose
     private Integer id;
+
+    @Ignore
     @SerializedName("video")
     @Expose
     private Boolean video;
+
+    @ColumnInfo(name = "vote_average")
     @SerializedName("vote_average")
     @Expose
     private Double voteAverage;
+
+    @ColumnInfo(name = "title")
     @SerializedName("title")
     @Expose
     private String title;
+
+    @ColumnInfo(name = "popularity")
     @SerializedName("popularity")
     @Expose
     private Double popularity;
+
+    @ColumnInfo(name = "poster_path")
     @SerializedName("poster_path")
     @Expose
     private String posterPath;
+
+    @Ignore
     @SerializedName("original_language")
     @Expose
     private String originalLanguage;
+
+    @ColumnInfo(name = "original_title")
     @SerializedName("original_title")
     @Expose
     private String originalTitle;
+
+    @Ignore
     @SerializedName("genre_ids")
     @Expose
     private List<Integer> genreIds = null;
+
+    @Ignore
     @SerializedName("backdrop_path")
     @Expose
     private String backdropPath;
+
+    @Ignore
     @SerializedName("adult")
     @Expose
     private Boolean adult;
+
+    @ColumnInfo(name = "overview")
     @SerializedName("overview")
     @Expose
     private String overview;
+
+    @ColumnInfo(name = "release_date")
     @SerializedName("release_date")
     @Expose
     private String releaseDate;
@@ -64,6 +109,14 @@ public class Movie_Data implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Long getUid() {
+        return uid;
+    }
+
+    public void setUid(Long uid) {
+        this.uid = uid;
     }
 
     public Boolean getVideo() {

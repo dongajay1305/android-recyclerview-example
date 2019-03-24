@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/rl_main"
+    android:background="@color/white">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_main_quarter"
+        card_view:cardElevation="@dimen/cardview_elevation"
+        card_view:cardCornerRadius="@dimen/cardview_corner_radius"
+        card_view:cardBackgroundColor="@color/gray_default_background"
+        android:background="@color/gray_default_background">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_image"
+                android:layout_height="100dp"
+                android:layout_width="80dp"/>
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/spacing_main"
+                android:paddingRight="@dimen/spacing_main"
+                android:paddingBottom="@dimen/spacing_main">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    style="@style/movie_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/titles_top_negative_margin"
+                    android:paddingTop="@dimen/spacing_main"
+                    android:text="Title" />
+
+                <TextView
+                    android:id="@+id/tv_overview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_text_half"
+                    style="@style/movie_overview"
+                    android:maxLines="4"
+                    android:ellipsize="end"
+                    android:text="Overview"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/movie_date"
+                    android:padding="0dp"
+                    android:textColor="@color/colorAccent"
+                    android:gravity="left"
+                    android:text="Release Date"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>
+
+

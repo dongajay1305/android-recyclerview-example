@@ -1,7 +1,5 @@
 package com.leanagriassignment;
 
-import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -11,8 +9,6 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.graphics.Palette;
-import android.util.TypedValue;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -21,7 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.leanagriassignment.common.Constants;
-import com.leanagriassignment.model.Movie_Data;
+import com.leanagriassignment.modal.Movie_Data;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 

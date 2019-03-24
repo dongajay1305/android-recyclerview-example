@@ -1,25 +1,30 @@
 package com.leanagriassignment;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Rect;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -28,8 +33,9 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.leanagriassignment.common.Constants;
-import com.leanagriassignment.model.Movie_Data;
-import com.leanagriassignment.model.Return_Data;
+import com.leanagriassignment.modal.Movie_Data;
+import com.leanagriassignment.modal.Return_Data;
+import com.leanagriassignment.roomdb.MovieViewModel;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,14 +47,12 @@ import okhttp3.Response;
 
 public class MoviesList_Activity extends AppCompatActivity {
 
-    private List<Movie_Data> movieList = new ArrayList<>();
-    private RecyclerView recyclerView;
+    private RecyclerView mRecyclerView;
     private Adapter_Movies mAdapter;
-    SwipeRefreshLayout mswipe1;
+    SwipeRefreshLayout mswipe;
     LinearLayoutManager mlinearLayoutManager;
     private StaggeredGridLayoutManager mGridLayoutManager;
-    LinearLayout llnodata;
-    TextView txtrefresh;
+
     ProgressBar progressbar;
 
     public static int ADVANCE_SCROLLING_COUNT = 6;
@@ -58,10 +62,15 @@ public class MoviesList_Activity extends AppCompatActivity {
 
     SharedPreferences pref;
     SharedPreferences.Editor editor;
+
+    //Room DB
+    private MovieViewModel mMovieViewModel;
+    boolean is_gridview = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies_list);
+
 
         pref = getSharedPreferences(Constants.PREF_NAME,0);
         editor = pref.edit();
@@ -78,50 +87,58 @@ public class MoviesList_Activity extends AppCompatActivity {
 
             }
         });
-
-        recyclerView =  findViewById(R.id.recycler_view);
+        mswipe =  findViewById(R.id.swipe);
+        mRecyclerView =  findViewById(R.id.recycler_view);
         progressbar =  findViewById(R.id.progressbar);
-        mswipe1 =  findViewById(R.id.swipe1);
-        llnodata =  findViewById(R.id.llnodata);
-        txtrefresh =  findViewById(R.id.txtrefresh);
 
-        //mlinearLayoutManager = new LinearLayoutManager(this);
-        //mlinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        mswipe.setColorSchemeResources(R.color.colorAccent, R.color.colorAccent, R.color.colorAccent);
+        mswipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                if(isInternetAvailable()) {
+                    refreshContent(true);
+                }else{
+                    showNoInternetToast();
+                    mswipe.setRefreshing(false);
+                }
+
+            }
+        });
+
         mGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(mGridLayoutManager);
-        //recyclerView.setItemAnimator(new DefaultItemAnimator());
-        //recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(getResources().getInteger(R.integer.spacing_main_triple_quarter)));
+        mAdapter = new Adapter_Movies(this);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(mGridLayoutManager);
+        mRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration(getResources().getInteger(R.integer.spacing_main_quarter)));
+
 
         new GetFeeds(1, false).execute();
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
+            public void onScrollStateChanged(RecyclerView mRecyclerView, int newState) {
+                super.onScrollStateChanged(mRecyclerView, newState);
             }
 
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
+            public void onScrolled(RecyclerView mRecyclerView, int dx, int dy) {
+                super.onScrolled(mRecyclerView, dx, dy);
 
-                if (!nomorefeed&&movieList.size()>0) {
-                    int visibleItemCount = recyclerView.getChildCount();
+                if (!nomorefeed) {
+                    int visibleItemCount = mRecyclerView.getChildCount();
                     int totalItemCount = mGridLayoutManager.getItemCount();
                     int[] firstVisibleItems = new int[2];
                     int[] firstVisibleItem_ = mGridLayoutManager.findFirstVisibleItemPositions(firstVisibleItems);
                     int firstVisibleItem = firstVisibleItem_[0];
-                    int currentpage = (Integer) mAdapter.GetPageNo();
+                    int currentpage =  mAdapter.GetPageNo();
 
-                    //for enable disable swiperefreshlayout
-                    int topRowVerticalPosition = 0;
-                    topRowVerticalPosition = (recyclerView == null || recyclerView.getChildCount() == 0) ? 0 : recyclerView.getChildAt(0).getTop();
-                    mswipe1.setEnabled(firstVisibleItem == 0 && topRowVerticalPosition >= 0);
-
-                    if (!isloading) {
+                    if (!isloading && firstVisibleItem>10) {
                         if (visibleItemCount + firstVisibleItem >= (totalItemCount - ADVANCE_SCROLLING_COUNT)) {
                             //load more
                             isloading = true;
                             mAdapter.SetLoadmoreProgress();
-                            recyclerView.post(new Runnable() {
+                            mRecyclerView.post(new Runnable() {
                                 public void run() {
                                     mAdapter.notifyItemInserted(mAdapter.getItemCount() - 1);
                                 }
@@ -137,16 +154,71 @@ public class MoviesList_Activity extends AppCompatActivity {
             }
         });
 
+
+        mMovieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
+
+           mMovieViewModel.getAllMovies().observe(this, new Observer<List<Movie_Data>>() {
+            @Override
+            public void onChanged(@Nullable final List<Movie_Data> movies) {
+                // Update the cached copy of the words in the adapter.
+                mAdapter.setMovies(movies);
+            }
+        });
+
     }
 
-    public void refreshContent(){
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_detail, menu);
 
-        movieList.clear();
+        if(is_gridview) {
+            menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.baseline_list_white));
+        }else{
+            menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.baseline_grid_on_white));
+        }
+            return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_about_app) {
+            Constants.showAboutApp(MoviesList_Activity.this);
+            return true;
+        }else if(id == R.id.action_grid_list){
+            is_gridview = !is_gridview;
+
+            if(is_gridview) {
+                item.setIcon(ContextCompat.getDrawable(this, R.drawable.baseline_list_white));
+                mGridLayoutManager.setSpanCount(2);
+
+            }else{
+                item.setIcon(ContextCompat.getDrawable(this, R.drawable.baseline_grid_on_white));
+                mGridLayoutManager.setSpanCount(1);
+
+            }
+            mAdapter.notifyDataSetChanged();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void refreshContent(boolean fromswipe){
+
         mAdapter.RefreshData();
         mAdapter.notifyDataSetChanged();
 
-        progressbar.setVisibility(View.VISIBLE);
-        recyclerView.setVisibility(View.GONE);
+        if(!fromswipe) {
+            progressbar.setVisibility(View.VISIBLE);
+        }
+        mRecyclerView.setVisibility(View.GONE);
 
         new GetFeeds(1, false).execute();
 
@@ -168,17 +240,17 @@ public class MoviesList_Activity extends AppCompatActivity {
             StaggeredGridLayoutManager.LayoutParams lp = (StaggeredGridLayoutManager.LayoutParams)view .getLayoutParams();
             int spanIndex = lp.getSpanIndex();
 
-            if(position>1){
-
-                if(spanIndex==0){
-                    outRect.left = dpToPx(verticalSpaceHeight);
-                }else{
-                    outRect.right = dpToPx(verticalSpaceHeight);
+            if(is_gridview) {
+                if (position < 2) {
+                    outRect.top = dpToPx(verticalSpaceHeight);
                 }
 
+                if (spanIndex == 0) {
+                    outRect.left = dpToPx(verticalSpaceHeight);
+                } else {
+                    outRect.right = dpToPx(verticalSpaceHeight);
+                }
             }
-
-
         }
     }
 
@@ -192,13 +264,18 @@ public class MoviesList_Activity extends AppCompatActivity {
         return (int) (px / Resources.getSystem().getDisplayMetrics().density);
     }
 
-
     public class GetFeeds extends AsyncTask<String, Void, Return_Data> {
 
         private Integer page_no = 1;
         private boolean isRefresh = false;
 
         GetFeeds(int page_number, boolean isrefresh) {
+
+            if(!isInternetAvailable()) {
+                showNoInternetToast();
+                return;
+            }
+
             this.page_no = page_number;
             this.isRefresh = isrefresh;
         }
@@ -237,27 +314,22 @@ public class MoviesList_Activity extends AppCompatActivity {
 
             try {
 
-                movieList = return_data.getResults();
-
-                if(movieList!=null&&movieList.size()>0){
-                    if(mAdapter!=null){
-                        mAdapter.SetPageNo(page_no);
-                        mAdapter.AddNewData(return_data.getResults());
-                        mAdapter.notifyDataSetChanged();
-                    }else{
-                        mAdapter = new Adapter_Movies(movieList,MoviesList_Activity.this);
-                        mAdapter.SetPageNo(page_no);
-                        mAdapter.RemoveLoadmoreProgress();
-                        recyclerView.setAdapter(mAdapter);
+                if(return_data.getResults()!=null&&return_data.getResults().size()>0){
+                    if(page_no==1){
+                        mMovieViewModel.deleteAll();
                     }
+
+                    mAdapter.SetPageNo(page_no);
+                    mMovieViewModel.insertAll(return_data.getResults());
+
                 }else{
                     nomorefeed = true;
                 }
 
+                mswipe.setRefreshing(false);
                 isloading = false;
                 progressbar.setVisibility(View.GONE);
-                recyclerView.setVisibility(View.VISIBLE);
-                llnodata.setVisibility(View.GONE);
+                mRecyclerView.setVisibility(View.VISIBLE);
 
             }catch (Exception e) {
                 e.printStackTrace();
@@ -266,7 +338,6 @@ public class MoviesList_Activity extends AppCompatActivity {
         }
 
     }
-
 
     AlertDialog alertDialog;
 
@@ -314,12 +385,30 @@ public class MoviesList_Activity extends AppCompatActivity {
                 editor.commit();
 
                 alertDialog.dismiss();
-                refreshContent();
+                if(isInternetAvailable()) {
+                    refreshContent(false);
+                }else{
+                    showNoInternetToast();
+                }
             }
         });
         alertDialog = builder.create();
         alertDialog.show();
 
+    }
+
+
+    public boolean isInternetAvailable(){
+        ConnectivityManager cm =
+                (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        return  isConnected;
+    }
+
+    public void showNoInternetToast(){
+        Toast.makeText(this, getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
     }
 
 }

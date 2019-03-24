@@ -13,24 +13,27 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.leanagriassignment.common.Constants;
-import com.leanagriassignment.model.Movie_Data;
+import com.leanagriassignment.modal.Movie_Data;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 public class Adapter_Movies extends RecyclerView.Adapter<Adapter_Movies.ViewHolder> {
 
-    private List<Movie_Data> moviesList;
+    //private List<Movie_Data> moviesList;
+    private List<Movie_Data> moviesList = Collections.emptyList();
     private int mpage_no;
     private static final int TYPE_ARTICLE = 1;
     private static final int TYPE_LOADER = 0;
     Context context;
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView ivImage;
         public TextView tvTitle, tvOverview, tvDate;
@@ -63,9 +66,18 @@ public class Adapter_Movies extends RecyclerView.Adapter<Adapter_Movies.ViewHold
         }
     }
 
+    private final LayoutInflater mInflater;
+    public Adapter_Movies(Context context) {
+        this.context = context;
+        mInflater = LayoutInflater.from(context);
+        moviesList = new ArrayList<>();
+    }
+
     public Adapter_Movies(List<Movie_Data> moviesList, Context context) {
         this.moviesList = moviesList;
         this.context = context;
+        mInflater = LayoutInflater.from(context);
+
     }
 
     @Override
@@ -73,11 +85,15 @@ public class Adapter_Movies extends RecyclerView.Adapter<Adapter_Movies.ViewHold
         View itemView;
 
         if(viewType==TYPE_ARTICLE){
-            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_movie, parent, false);
+//           if (((MoviesList_Activity)context).is_gridview){
+                itemView = mInflater.inflate(R.layout.list_item_movie, parent, false);
+//            }else{
+//               itemView = mInflater.inflate(R.layout.list_item_movie_list, parent, false);
+//            }
         }else if(viewType==TYPE_LOADER){
-            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_progressbar, parent, false);
+            itemView = mInflater.inflate(R.layout.list_item_progressbar, parent, false);
         }else{
-            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_none, parent, false);
+            itemView = mInflater.inflate(R.layout.list_item_none, parent, false);
         }
 
         ViewHolder viewHolder = new ViewHolder(itemView,viewType);
@@ -103,13 +119,16 @@ public class Adapter_Movies extends RecyclerView.Adapter<Adapter_Movies.ViewHold
                 DateFormat dateFormatPrint = new SimpleDateFormat("dd-MMM-yyyy");
                 Date dateAPI = new Date();
 
+                String printdate = "";
                 try {
                     dateAPI = dateFormatAPI.parse(movie.getReleaseDate());
+                    printdate = dateFormatPrint.format(dateAPI);
                 } catch (ParseException e) {
                     e.printStackTrace();
+                    printdate = "N/A";
                 }
 
-                holder.tvDate.setText(dateFormatPrint.format(dateAPI));
+                holder.tvDate.setText(printdate);
                 String url=Constants.IMAGE_URL_PATH+moviesList.get(position).getPosterPath();
                 Log.e("my log","picture path : "+url);
                 Picasso.get().load(url).placeholder(R.color.placeholder).fit().into(((ViewHolder) holder).ivImage);
@@ -121,7 +140,7 @@ public class Adapter_Movies extends RecyclerView.Adapter<Adapter_Movies.ViewHold
 
     @Override
     public int getItemCount() {
-        return moviesList.size();
+            return moviesList.size();
     }
 
     public void SetPageNo(int page_no){
@@ -145,31 +164,36 @@ public class Adapter_Movies extends RecyclerView.Adapter<Adapter_Movies.ViewHold
         this.moviesList.clear();
     }
 
-    public void AddNewData(List<Movie_Data> mlistvideo){
+    public void addNewData(List<Movie_Data> mMoviesList){
         RemoveLoadmoreProgress();
-        for(int i=0;i< mlistvideo.size(); i++){
-            if(!moviesList.contains(mlistvideo.get(i))){
-                this.moviesList.add(mlistvideo.get(i));
+        for(Movie_Data data:mMoviesList){
+            if(!moviesList.contains(data)){
+                moviesList.add(data);
             }
         }
+        notifyDataSetChanged();
     }
 
     public void SetLoadmoreProgress(){
-        if(moviesList.get(moviesList.size() - 1) != null){
+        if(moviesList.get(moviesList.size() - 1) != null) {
             this.moviesList.add(null);
         }
     }
 
-    public void RemoveLoadmoreProgress(){
-//            try {
-                if(moviesList.size()>0) {
-                    if (moviesList.get(moviesList.size() - 1) == null ) {
-                        this.moviesList.remove(moviesList.size() - 1);
-                    }
-                }
-//            }catch (Exception e){
-//                e.printStackTrace();
-//            }
+    void setMovies(List<Movie_Data> movies) {
+        moviesList = movies;
+        notifyDataSetChanged();
+    }
 
+    public void RemoveLoadmoreProgress(){
+                try {
+                    if (moviesList != null && moviesList.size() > 0) {
+                        if (moviesList.get(moviesList.size() - 1) == null) {
+                            this.moviesList.remove(moviesList.size() - 1);
+                        }
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
     }
 }
