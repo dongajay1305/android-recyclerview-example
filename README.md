@@ -34,7 +34,7 @@ Libraries
 - okHttp is networking lib for API calls.
 - Picasso is image loading lib.
 - Gson is JSON parsing lib.
-- Room database is used for offline cache of APIs.
+- Room database for offline caching of network APIs.
 - For Movie Detail screen android palette lib is source to create gradiant, statusbar color and font colors based on bitmap of movie poster.
 
 
