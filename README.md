@@ -29,13 +29,12 @@ App overview
 
 Libraries
 -----------
-(1) Movie List Screen.
+
 - Recyclerview with Gridlayout manager used to show movie list.
 - okHttp is networking lib for API calls.
 - Picasso is image loading lib.
 - Gson is JSON parsing lib.
-
-(2) Movie Deatil Screen.
+- Room database is used for offline cache of APIs.
 - For Movie Detail screen android palette lib is source to create gradiant, statusbar color and font colors based on bitmap of movie poster.
 
 
