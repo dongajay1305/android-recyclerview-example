@@ -1,4 +1,4 @@
-package com.leanagriassignment.modal;
+package com.recyclerview.modal;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;

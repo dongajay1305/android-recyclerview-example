@@ -1,4 +1,4 @@
-package com.leanagriassignment.roomdb;
+package com.recyclerview.roomdb;
 
 /*
  * Copyright (C) 2017 Google Inc.
@@ -24,7 +24,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-import com.leanagriassignment.modal.Movie_Data;
+import com.recyclerview.modal.Movie_Data;
 
 /**
  * This is the backend. The database. This used to be done by the OpenHelper.

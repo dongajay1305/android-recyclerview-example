@@ -1,4 +1,4 @@
-package com.leanagriassignment.common;
+package com.recyclerview.common;
 
 import android.content.Context;
 import android.content.DialogInterface;

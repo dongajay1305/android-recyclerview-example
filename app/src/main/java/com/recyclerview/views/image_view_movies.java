@@ -1,8 +1,7 @@
-package com.leanagriassignment.views;
+package com.recyclerview.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 /**
  * Created by jaydonga on 9/21/16.

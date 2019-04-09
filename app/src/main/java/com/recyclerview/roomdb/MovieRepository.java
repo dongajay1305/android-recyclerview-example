@@ -1,4 +1,4 @@
-package com.leanagriassignment.roomdb;
+package com.recyclerview.roomdb;
 
 /*
  * Copyright (C) 2017 Google Inc.
@@ -20,7 +20,7 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
-import com.leanagriassignment.modal.Movie_Data;
+import com.recyclerview.modal.Movie_Data;
 
 import java.util.List;
 

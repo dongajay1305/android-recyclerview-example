@@ -1,4 +1,4 @@
-package com.leanagriassignment.roomdb;
+package com.recyclerview.roomdb;
 
 /*
  * Copyright (C) 2017 Google Inc.
@@ -22,7 +22,7 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
-import com.leanagriassignment.modal.Movie_Data;
+import com.recyclerview.modal.Movie_Data;
 
 import java.util.List;
 

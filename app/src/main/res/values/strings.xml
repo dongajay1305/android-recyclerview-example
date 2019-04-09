@@ -1,9 +1,4 @@
 <resources>
-    <string name="app_name">Leanagri Assignment</string>
-    <string name="title_activity_detail">DetailActivity</string>
-    <string name="action_about">About app</string>
-    <string name="action_list_grid">List Grid View</string>
-    <string name="title_activity_movies_list_">MoviesList_Activity</string>
-    <string name="no_internet">No internet connection</string>
+    <string name="app_name">Recyclerview Example</string>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.leanagriassignment.views;
+package com.recyclerview.views;
 
 import android.content.Context;
 import android.util.AttributeSet;

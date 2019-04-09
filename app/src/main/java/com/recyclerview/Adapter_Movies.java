@@ -1,4 +1,4 @@
-package com.leanagriassignment;
+package com.recyclerview;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +12,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.leanagriassignment.common.Constants;
-import com.leanagriassignment.modal.Movie_Data;
+import com.recyclerview.common.Constants;
+import com.recyclerview.modal.Movie_Data;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
@@ -23,7 +23,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 
 public class Adapter_Movies extends RecyclerView.Adapter<Adapter_Movies.ViewHolder> {
@@ -49,16 +48,6 @@ public class Adapter_Movies extends RecyclerView.Adapter<Adapter_Movies.ViewHold
                 tvDate =  view.findViewById(R.id.tv_date);
                 cardview = view.findViewById(R.id.card_view);
 
-                cardview.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                    Intent i = new Intent(context,Detail_Activity.class);
-                    i.putExtra("data", (Serializable) moviesList.get(getAdapterPosition()));
-                    context.startActivity(i);
-
-                    }
-                });
 
             }else if(type == TYPE_LOADER){
                 progressBar = view.findViewById(R.id.progressBar);

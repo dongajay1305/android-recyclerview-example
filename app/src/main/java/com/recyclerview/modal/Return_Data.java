@@ -1,4 +1,4 @@
-package com.leanagriassignment.modal;
+package com.recyclerview.modal;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
